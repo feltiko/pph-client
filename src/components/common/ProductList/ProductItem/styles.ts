@@ -12,4 +12,9 @@ export default {
     align-items: center;
     justify-content: center;
   `,
+  avatar: css`
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+  `,
 };

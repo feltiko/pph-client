@@ -14,9 +14,10 @@
     "emotion": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-fetching-library": "^1.7.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "rest-hooks": "^4.5.9",
+    "storeon": "^2.0.2",
     "typescript": "~3.7.2"
   },
   "scripts": {
