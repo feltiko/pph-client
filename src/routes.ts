@@ -5,40 +5,69 @@ import Product from './pages/Product';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 
-export default [
-  {
-    name: 'Login',
-    path: '/auth/login',
-    isProtected: false,
-    component: Login,
-    navAvailable: true,
-  },
-  {
-    name: 'Register',
-    path: '/auth/register',
-    isProtected: false,
-    component: Register,
-    navAvailable: true,
-  },
+export const navigation = {
+  anonymous: [
+    {
+      name: 'Browse',
+      path: '/',
+    },
+    {
+      name: 'Login',
+      path: '/auth/login',
+    },
+    {
+      name: 'Register',
+      path: '/auth/register',
+    },
+  ],
+  loggedIn: [
+    {
+      name: 'Home',
+      path: '/',
+    },
+    {
+      name: 'Profile',
+      path: '/profile/:username',
+    },
+    {
+      name: 'Add product +',
+      path: '/product/add',
+    },
+  ],
+};
+
+export const routes = [
   {
     name: 'Category',
     path: '/category/:id',
-    isProtected: false,
     component: Category,
-    navAvailable: false,
   },
   {
     name: 'Product',
     path: '/product/:id',
-    isProtected: false,
     component: Product,
-    navAvailable: false,
+  },
+  {
+    name: 'Login',
+    path: '/auth/login',
+    component: Login,
+  },
+  {
+    name: 'Register',
+    path: '/auth/register',
+    component: Register,
   },
   {
     name: 'Home',
     path: '/',
-    isProtected: false,
     component: Homepage,
-    navAvailable: true,
+  },
+];
+
+export const protectedRoutes = [
+  {
+    name: 'Add project +',
+    path: '/product/add',
+    component: Product,
   },
 ];

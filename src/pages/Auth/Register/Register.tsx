@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import { useMutation } from 'react-fetching-library';
 import { useStoreon } from 'storeon/react';
 import { Typography, Form, Input, Button } from 'antd';
@@ -18,7 +19,9 @@ const layout = {
 
 export default function Register() {
   const { loading, payload, mutate, error } = useMutation(register);
-  const { dispatch } = useStoreon<State, Events>('user');
+  const { dispatch, isLoggedIn } = useStoreon<State, Events>('user', 'isLoggedIn');
+
+  if (isLoggedIn) return <Redirect to="/" />;
 
   const handleSubmit = async (values: RegisterUser) => {
     const { payload, error: mutateError } = await mutate(values);

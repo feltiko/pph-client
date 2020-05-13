@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { useMutation } from 'react-fetching-library';
 import { useStoreon } from 'storeon/react';
 import { Typography, Form, Input, Button } from 'antd';
@@ -18,10 +19,11 @@ const layout = {
 
 export default function Register() {
   const { loading, payload, mutate, error } = useMutation(login);
-  const { dispatch, user } = useStoreon<State, Events>('user');
+  const { dispatch, isLoggedIn } = useStoreon<State, Events>('user', 'isLoggedIn');
 
-  console.log(user);
+  if (isLoggedIn) return <Redirect to="/" />;
 
+  console.log(isLoggedIn);
   const handleSubmit = async (values: LoginUser) => {
     const { payload, error: mutateError } = await mutate({
       identifier: values.identifier,
@@ -41,22 +43,12 @@ export default function Register() {
     handleSubmit(values);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <div>
       <Header />
       <Content>
         <Title level={3}>Login</Title>
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
+        <Form {...layout} name="basic" onFinish={onFinish}>
           <Form.Item
             label="Email"
             name="identifier"
